@@ -3,6 +3,7 @@ import useToggle from '../../hooks/useToggle';
 import Navigation from '../../components/organisms/Navigation';
 import Header from '../../components/organisms/Header';
 import memoDatas from '../../model/memoData';
+import styled from 'styled-components';
 
 interface Props {
   datas: Array<memoDatas>;
@@ -15,12 +16,23 @@ const Templates = ({ datas, pageName, children }: Props) => {
   const [openNav, toggleNav] = useToggle();
 
   return (
-    <>
-      <Header navOpen={openNav} onToggle={toggleNav} pageName={pageName} />
+    <Main open={openNav}>
       <Navigation open={openNav} datas={datas} />
+      <Header onToggle={toggleNav} pageName={pageName} />
       {children}
-    </>
+    </Main>
   );
 };
+
+const Main = styled.main<{ open: boolean }>`
+  position: absolute;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  transition: width 0.5s ease;
+  width: ${(props) => (props.open ? 'calc(100% - 280px);' : '100%')};
+`;
 
 export default Templates;

@@ -5,13 +5,12 @@ import Span from '../../atoms/Span';
 import Button from '../../atoms/Button';
 
 interface Props {
-  navOpen: boolean;
   onToggle?: (e: React.MouseEvent<HTMLSpanElement>) => void;
   pageName: string;
 }
-const Header = ({ navOpen, onToggle, pageName }: Props) => {
+const Header = ({ onToggle, pageName }: Props) => {
   return (
-    <StyledHeader navOpen={navOpen}>
+    <StyledHeader>
       <Button onClick={onToggle} color="#3399ff">
         Menu
       </Button>
@@ -29,19 +28,12 @@ const Header = ({ navOpen, onToggle, pageName }: Props) => {
   );
 };
 
-const StyledHeader = styled.header<Props>`
+const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 50px;
 
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-
-  transition: width 0.5s ease;
-  width: ${(props) => (props.navOpen ? 'calc(100% - 280px);' : '100%')};
   height: 70px;
   border-bottom: 1px solid #f4f4f4;
 `;
