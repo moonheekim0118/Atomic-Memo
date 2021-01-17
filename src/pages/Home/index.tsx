@@ -15,11 +15,7 @@ const mockData = [
 const Home = () => {
   let { id } = useParams<{ id: string }>();
 
-  return (
-    <Templates datas={mockData} pageName="Home">
-      <div>우린 언제나 그랬듯이 답을 찾을 것이다</div>
-    </Templates>
-  );
+  return <Templates datas={mockData} pageName="Home"></Templates>;
 };
 
 export default Home;
