@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Templates from '../templates';
+import MemoView from '../../components/organisms/MemoView';
 
 const mockData = [
   {
@@ -15,7 +16,11 @@ const mockData = [
 const Home = () => {
   let { id } = useParams<{ id: string }>();
 
-  return <Templates datas={mockData} pageName="Home"></Templates>;
+  return (
+    <Templates datas={mockData} pageName="Home">
+      <MemoView />
+    </Templates>
+  );
 };
 
 export default Home;

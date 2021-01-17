@@ -7,6 +7,7 @@ interface Props {
   textAlign?: 'left' | 'right' | 'center';
   width?: string;
   padding?: string;
+  display?: string;
   size?: 'small' | 'normal' | 'big' | 'title';
 }
 
@@ -16,6 +17,7 @@ const Span = ({
   textAlign = 'left',
   width = 'auto',
   padding,
+  display = 'inline',
   size = 'normal',
 }: Props) => {
   const stylingProps = {
@@ -23,6 +25,7 @@ const Span = ({
     textAlign,
     width,
     padding,
+    display,
   };
 
   return (
@@ -33,12 +36,13 @@ const Span = ({
 };
 
 const StyledSpan = styled.span<Props>`
+  display: ${(props: Props) => props.display};
   color: ${(props: Props) => props.color || 'black'};
   text-align: ${(props: Props) => props.textAlign};
   width: ${(props: Props) => props.width};
   padding: ${(props: Props) => props.padding};
   overflow: hidden;
-  white-space: nowrap;
+  white-space: ${(props: Props) => props.display !== 'block' && 'nowrap'};
   text-overflow: ellipsis;
 
   &.small {

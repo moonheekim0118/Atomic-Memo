@@ -31,6 +31,7 @@ const Main = styled.main<{ open: boolean }>`
   flex-direction: column;
   justify-content: center;
 
+  height: 80%;
   transition: width 0.5s ease;
   width: ${(props) => (props.open ? 'calc(100% - 280px);' : '100%')};
 `;
