@@ -9,7 +9,7 @@ const Root = () => {
       <GlobalStyle />
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route path="/:id" exact component={Home} />
           <Route path="/about" exact component={Trash} />
         </Switch>
       </BrowserRouter>
