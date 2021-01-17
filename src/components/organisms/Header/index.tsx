@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Span from '../../atoms/Span';
 import Button from '../../atoms/Button';
@@ -11,9 +12,19 @@ interface Props {
 const Header = ({ navOpen, onToggle, pageName }: Props) => {
   return (
     <StyledHeader navOpen={navOpen}>
-      <Button onClick={onToggle}>메뉴</Button>
+      <Button onClick={onToggle} color="#3399ff">
+        Menu
+      </Button>
       <Span>{pageName}</Span>
-      <Span>Home</Span>
+      {pageName === 'Home' ? (
+        <Link to="/trash">
+          <Span>Trash</Span>
+        </Link>
+      ) : (
+        <Link to="/">
+          <Span>Home</Span>
+        </Link>
+      )}
     </StyledHeader>
   );
 };
