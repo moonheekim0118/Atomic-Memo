@@ -36,6 +36,15 @@ const StyledNavigation = styled.nav<Props>`
   border: 1px solid #e0e0d1;
   transition: transform 0.5s ease;
   transform: ${(props) => (props.open ? 'translateX(0)' : 'translateX(-100%)')};
+  overflow-y: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
 `;
 
 export default Navigation;

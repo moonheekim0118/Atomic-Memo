@@ -9,6 +9,7 @@ const Root = () => {
       <GlobalStyle />
       <BrowserRouter>
         <Switch>
+          <Route path="/" exact component={Home} />
           <Route path="/:id" exact component={Home} />
           <Route path="/about" exact component={Trash} />
         </Switch>
@@ -18,7 +19,7 @@ const Root = () => {
 };
 
 const GlobalStyle = createGlobalStyle`
-    body{
+     *{
         box-sizing:border-box;
         margin:0;
         padding:0;

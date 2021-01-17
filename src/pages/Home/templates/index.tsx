@@ -1,5 +1,6 @@
 import React from 'react';
 import Navigation from '../../../components/organisms/Navigation';
+import Header from '../../../components/organisms/Header';
 
 const mockData = [
   {
@@ -14,6 +15,7 @@ const mockData = [
 const HomeTemplates = () => {
   return (
     <>
+      <Header navOpen={true} pageName="Writing" />
       <Navigation open={true} datas={mockData} />
     </>
   );
