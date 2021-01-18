@@ -64,7 +64,7 @@ const reducer = (state = initialState, action) => {
     case type.LOAD_TRASH_SUCCESS:
       return {
         ...state,
-        trash: [...action.data],
+        trash: action.data,
         loadTrashLoading: false,
         loadTrashDone: true,
         loadTrashError: null,

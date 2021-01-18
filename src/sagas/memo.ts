@@ -1,16 +1,17 @@
 import { all, fork, takeLatest, put, call } from 'redux-saga/effects';
+import formatTime from '../util/formatTime';
 import * as type from '../actions/memo';
 import rsf from '../firebase';
 
 function* loadMemos() {
   try {
     const snapshot = yield call(rsf.firestore.getCollection, 'memos');
-    let datas;
+    let datas = [];
     snapshot.forEach((data) => {
-      datas = {
-        ...datas,
-        [data.id]: data.data(),
-      };
+      const refinedData = data.data();
+      refinedData.time = formatTime(refinedData.time.seconds);
+      refinedData.id = data.id;
+      datas.push(refinedData);
     });
 
     yield put({
@@ -25,29 +26,95 @@ function* loadMemos() {
   }
 }
 
-function* loadTrash(action) {
+function* loadTrash() {
   try {
-  } catch (error) {}
+    const snapshot = yield call(rsf.firestore.getCollection, 'trash');
+    let datas = [];
+    snapshot.forEach((data) => {
+      const refinedData = data.data();
+      refinedData.time = formatTime(refinedData.time.seconds);
+      datas.push(refinedData);
+    });
+
+    yield put({
+      type: type.LOAD_TRASH_SUCCESS,
+      data: datas,
+    });
+  } catch (error) {
+    yield put({
+      type: type.LOAD_TRASH_FAIL,
+      error: error || '다시 시도해주세요',
+    });
+  }
 }
 
 function* createMemo(action) {
   try {
-  } catch (error) {}
+    yield call(rsf.firestore.addDocument, 'memos', action.data);
+    yield put({
+      type: type.CREATE_SUCCESS,
+      data: action.data,
+    });
+  } catch (error) {
+    yield put({
+      type: type.CREATE_FAIL,
+      error: error || '다시 시도해주세요',
+    });
+  }
 }
 
 function* updateMemo(action) {
   try {
-  } catch (error) {}
+    yield call(rsf.firestore.updateDocument, 'memos', action.data);
+    yield put({
+      type: type.UPDATE_SUCCESS,
+      data: action.data,
+    });
+  } catch (error) {
+    yield put({
+      type: type.UPDATE_FAIL,
+      error: error || '다시 시도해주세요',
+    });
+  }
 }
 
 function* trashMemo(action) {
   try {
-  } catch (error) {}
+    // action.data === id
+    // document 찾기 -> trash 에 저장 -> memos 로부터 삭제
+    const snapshot = yield call(
+      rsf.firestore.getDocument,
+      `memos/${action.data}`
+    );
+    const document = snapshot.data();
+    yield call(rsf.firestore.addDocument, 'trash', document);
+    yield call(rsf.firestore.deleteDocument, `memos/${action.data}`);
+
+    yield put({
+      type: type.TRASH_SUCCESS,
+      data: document,
+    });
+  } catch (error) {
+    yield put({
+      type: type.TRASH_FAIL,
+      error: error || '다시 시도해주세요',
+    });
+  }
 }
 
 function* removeMemo(action) {
   try {
-  } catch (error) {}
+    yield call(rsf.firestore.deleteDocument, `trash/${action.data}`);
+    yield put({
+      type: type.REMOVE_SUCCESS,
+      data: action.data,
+    });
+  } catch (error) {
+    yield put({
+      type: type.REMOVE_FAIL,
+      error: error || '다시 시도해주세요',
+    });
+  }
 }
 
 function* watchLoadMemos() {
