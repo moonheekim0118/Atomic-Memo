@@ -7,7 +7,7 @@ const useToggle = (initialValue = true) => {
     setter(!value);
   }, [value]);
 
-  return [value, Toggle] as const;
+  return [value, Toggle, setter] as const;
 };
 
 export default useToggle;
