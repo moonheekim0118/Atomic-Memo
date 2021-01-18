@@ -4,10 +4,12 @@ import Option from '../../atoms/Option';
 import { memoList } from '../../../util/memoKind';
 import styled from 'styled-components';
 
-const DEFAULT_TEXT = 'Select Kind of Memo!';
+interface Props {
+  defaultText: string;
+  setDefaultText: React.Dispatch<React.SetStateAction<string>>;
+}
 
-const Select = () => {
-  const [defaultText, setDefaultText] = useState<string>(DEFAULT_TEXT);
+const Select = ({ defaultText, setDefaultText }: Props) => {
   const [showList, toggleList, setShowList] = useToggle(false);
 
   useEffect(() => {

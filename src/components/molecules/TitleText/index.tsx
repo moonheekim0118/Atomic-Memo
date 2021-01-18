@@ -1,12 +1,15 @@
 import React from 'react';
-import useValidation from '../../../hooks/useValidation';
 import styled from 'styled-components';
 import Textarea from '../../atoms/Textarea';
 import Span from '../../atoms/Span';
 
-const TitleText = () => {
-  const [value, onChange, error] = useValidation({ max: 40, min: 1 });
+interface Props {
+  value: string;
+  onChange: (e: React.MouseEvent) => void;
+  error: boolean;
+}
 
+const TitleText = ({ value, onChange, error }: Props) => {
   return (
     <StyledTitleText>
       <Textarea value={value} onChange={onChange} size="title" />
