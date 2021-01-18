@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { loadMemoAction } from '../../actions/memo';
 import Templates from '../templates';
 import MemoView from '../../components/organisms/MemoView';
 
@@ -15,6 +17,11 @@ const mockData = [
 
 const Home = () => {
   let { id } = useParams<{ id: string }>();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadMemoAction());
+  }, []);
 
   return (
     <Templates datas={mockData} pageName="Home">
