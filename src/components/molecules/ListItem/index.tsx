@@ -2,7 +2,6 @@ import React from 'react';
 import Span from '../../atoms/Span';
 import MemoTitle from '../MemoTitle';
 import styled from 'styled-components';
-import Memokind from '../../../util/memoKind';
 import { Link, useLocation } from 'react-router-dom';
 
 // 네비게이션 바에 들어갈 메모 아이템 링크

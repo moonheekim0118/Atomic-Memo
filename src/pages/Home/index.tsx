@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Templates from '../templates';
 import MemoView from '../../components/organisms/MemoView';
