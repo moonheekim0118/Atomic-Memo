@@ -3,9 +3,21 @@ import * as type from '../actions/memo';
 export const initialState = {
   memos: [],
   trash: [],
+
+  singleMemo: null,
+  singleTrash: null,
+
+  loadSingleMemoLoading: false,
+  loadSingleMemoDone: false,
+  loadSingleMemoError: null,
+
   loadMemoLoading: false,
   loadMemoDone: false,
   loadMemoError: null,
+
+  loadSingleTrashLoading: false,
+  loadSingleTrashDone: false,
+  loadSingleTrashError: null,
 
   loadTrashLoading: false,
   loadTrashDone: false,
@@ -30,6 +42,28 @@ export const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case type.LOAD_SINGLE_MEMO_REQUEST:
+      return {
+        ...state,
+        loadSingleMemoLoading: true,
+        loadSingleMemoDone: false,
+        loadSingleMemoError: null,
+      };
+    case type.LOAD_SINGLE_MEMO_SUCCESS:
+      return {
+        ...state,
+        singleMemo: action.data,
+        loadSingleMemoLoading: false,
+        loadSingleMemoDone: true,
+        loadSingleMemoError: null,
+      };
+    case type.LOAD_SINGLE_MEMO_FAIL:
+      return {
+        ...state,
+        loadSingleMemoLoading: false,
+        loadSingleMemoDone: false,
+        loadSingleMemoError: action.error,
+      };
     case type.LOAD_MEMOS_REQUEST:
       return {
         ...state,
@@ -53,6 +87,28 @@ const reducer = (state = initialState, action) => {
         loadMemoError: action.error,
       };
 
+    case type.LOAD_SINGLE_TRASH_REQUEST:
+      return {
+        ...state,
+        loadSingleTrashLoading: true,
+        loadSingleTrashDone: false,
+        loadSingleTrashError: null,
+      };
+    case type.LOAD_SINGLE_TRASH_SUCCESS:
+      return {
+        ...state,
+        singleTrash: action.data,
+        loadSingleTrashLoading: false,
+        loadSingleTrashDone: true,
+        loadSingleTrashError: null,
+      };
+    case type.LOAD_SINGLE_TRASH_FAIL:
+      return {
+        ...state,
+        loadSingleTrashLoading: false,
+        loadSingleTrashDone: false,
+        loadSingleTrashError: action.error,
+      };
     case type.LOAD_TRASH_REQUEST:
       return {
         ...state,

@@ -3,11 +3,17 @@ import TitleView from '../../molecules/TitleView';
 import MainView from '../../molecules/MainView';
 import styled from 'styled-components';
 
-const MemoView = () => {
+interface Props {
+  title: string;
+  time: string;
+  main: string;
+}
+
+const MemoView = ({ title, time, main }: Props) => {
   return (
     <StyledMemoView>
-      <TitleView text="우하하하하" time="2020-12-30" />
-      <MainView text="ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" />
+      <TitleView text={title} time={time} />
+      <MainView text={main} />
     </StyledMemoView>
   );
 };

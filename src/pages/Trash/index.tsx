@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { loadSinlgeTrashAction } from '../../actions/memo';
 import Templates from '../templates';
-
-const mockData = [
-  {
-    id: 1,
-    title: '안녕하세ddddd요쿵짜리쿵ㅇ짜리쿵쿵짜리라',
-    kind: 'Work',
-    time: '2021~00',
-  },
-  { id: 2, title: '안녕하세요', kind: 'Life', time: '2021~00' },
-];
+import MemoView from '../../components/organisms/MemoView';
 
 const Trash = () => {
-  return <Templates datas={mockData} pageName="trash" />;
+  let { id } = useParams<{ id: string }>();
+  const dispatch = useDispatch();
+  const { trash, singleTrash } = useSelector((state) => state.memo);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(loadSinlgeTrashAction(id));
+    }
+  }, [id]);
+
+  return (
+    <Templates type="trash" pageName="trash">
+      {singleTrash && (
+        <MemoView title={trash.title} time={trash.time} main={trash.main} />
+      )}
+      {!singleTrash && trash.length > 0 && (
+        <MemoView
+          title={singleTrash[0].title}
+          time={singleTrash[0].time}
+          main={singleTrash[0].main}
+        />
+      )}
+    </Templates>
+  );
 };
 
 export default Trash;

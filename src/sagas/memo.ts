@@ -1,7 +1,27 @@
-import { all, fork, takeLatest, put, call } from 'redux-saga/effects';
+import { all, fork, takeLatest, put, call, take } from 'redux-saga/effects';
 import formatTime from '../util/formatTime';
 import * as type from '../actions/memo';
 import rsf from '../firebase';
+
+function* loadSingleMemo(action) {
+  try {
+    const snapshot = yield call(
+      rsf.firestore.getDocument,
+      `memos/${action.data}`
+    );
+    const data = snapshot.data();
+    data.time = formatTime(data.time.seconds);
+    yield put({
+      type: type.LOAD_SINGLE_MEMO_SUCCESS,
+      data,
+    });
+  } catch (error) {
+    yield put({
+      type: type.LOAD_SINGLE_MEMO_FAIL,
+      error: error || '다시 시도해주세요',
+    });
+  }
+}
 
 function* loadMemos() {
   try {
@@ -21,6 +41,26 @@ function* loadMemos() {
   } catch (error) {
     yield put({
       type: type.LOAD_MEMOS_FAIL,
+      error: error || '다시 시도해주세요',
+    });
+  }
+}
+
+function* loadSingleTrash(action) {
+  try {
+    const snapshot = yield call(
+      rsf.firestore.getDocument,
+      `trash/${action.data}`
+    );
+    const data = snapshot.data();
+    data.time = formatTime(data.time.seconds);
+    yield put({
+      type: type.LOAD_SINGLE_TRASH_SUCCESS,
+      data,
+    });
+  } catch (error) {
+    yield put({
+      type: type.LOAD_SINGLE_TRASH_FAIL,
       error: error || '다시 시도해주세요',
     });
   }
@@ -117,8 +157,16 @@ function* removeMemo(action) {
   }
 }
 
+function* watchLoadSingleMemo() {
+  yield takeLatest(type.LOAD_SINGLE_MEMO_REQUEST, loadSingleMemo);
+}
+
 function* watchLoadMemos() {
   yield takeLatest(type.LOAD_MEMOS_REQUEST, loadMemos);
+}
+
+function* watchLoadSingleTrash() {
+  yield takeLatest(type.LOAD_SINGLE_TRASH_REQUEST, loadSingleTrash);
 }
 
 function* watchLoadTrash() {
@@ -143,7 +191,9 @@ function* watchRemove() {
 
 export default function* memoSaga() {
   yield all([
+    fork(watchLoadSingleMemo),
     fork(watchLoadMemos),
+    fork(watchLoadSingleTrash),
     fork(watchLoadTrash),
     fork(watchCreate),
     fork(watchUpdate),

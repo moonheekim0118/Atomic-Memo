@@ -1,6 +1,14 @@
+export const LOAD_SINGLE_MEMO_REQUEST = 'LOAD_SINGLE_MEMO_REQUEST';
+export const LOAD_SINGLE_MEMO_SUCCESS = 'LOAD_SINGLE_MEMO_SUCCESS';
+export const LOAD_SINGLE_MEMO_FAIL = 'LOAD_SINGLE_MEMO_FAIL';
+
 export const LOAD_MEMOS_REQUEST = 'LOAD_MEMOS_REQUEST';
 export const LOAD_MEMOS_SUCCESS = 'LOAD_MEMOS_SUCCESS';
 export const LOAD_MEMOS_FAIL = 'LOAD_MEMOS_FAIL';
+
+export const LOAD_SINGLE_TRASH_REQUEST = 'LOAD_SINGLE_TRASH_REQUEST';
+export const LOAD_SINGLE_TRASH_SUCCESS = 'LOAD_SINGLE_TRASH_SUCCESS';
+export const LOAD_SINGLE_TRASH_FAIL = 'LOAD_SINGLE_TRASH_FAIL';
 
 export const LOAD_TRASH_REQUEST = 'LOAD_TRASH_REQUEST';
 export const LOAD_TRASH_SUCCESS = 'LOAD_TRASH_SUCCESS';
@@ -22,8 +30,16 @@ export const REMOVE_REQUEST = 'REMOVE_REQUEST';
 export const REMOVE_SUCCESS = 'REMOVE_SUCCESS';
 export const REMOVE_FAIL = 'REMOVE_FAIL';
 
+export const loadSinlgeMemoAction = (data) => {
+  return { type: LOAD_SINGLE_MEMO_REQUEST, data };
+};
+
 export const loadMemoAction = () => {
   return { type: LOAD_MEMOS_REQUEST };
+};
+
+export const loadSinlgeTrashAction = (data) => {
+  return { type: LOAD_SINGLE_TRASH_REQUEST, data };
 };
 
 export const loadTrashAction = () => {
