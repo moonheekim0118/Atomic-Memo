@@ -9,11 +9,11 @@ const Root = () => {
       <BrowserRouter>
         <Switch>
           <Route path="/trash" exact component={Pages.Trash} />
-          <Route path="/trash:id" exact component={Pages.Trash} />
+          <Route path="/trash/:id" exact component={Pages.TrashId} />
           <Route path="/write" exact component={Pages.Write} />
-          <Route path="/update:id" exact component={Pages.Update} />
+          <Route path="/update/:id" exact component={Pages.Update} />
           <Route path="/" exact component={Pages.Home} />
-          <Route path="/:id" exact component={Pages.Home} />
+          <Route path="/:id" exact component={Pages.HomeId} />
         </Switch>
       </BrowserRouter>
     </Suspense>

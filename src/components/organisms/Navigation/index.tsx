@@ -16,7 +16,7 @@ const Navigation = ({ open, datas, type }: Props) => {
       title={v.title}
       time={v.time}
       kind={v.kind}
-      path={type === 'memos' ? `/${v.id}` : `/trash${v.id}`}
+      path={type === 'memos' ? `/${v.id}` : `/trash/${v.id}`}
     />
   ));
   return <StyledNavigation open={open}>{List}</StyledNavigation>;
