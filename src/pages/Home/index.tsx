@@ -33,6 +33,7 @@ const Home = () => {
       {singleMemo && (
         <MemoView
           data={singleMemo}
+          type="memos"
           onClickUpdate={onClickUpdate}
           onClickRemove={onClickRemove}
         />
@@ -40,6 +41,7 @@ const Home = () => {
       {!singleMemo && memos.length > 0 && (
         <MemoView
           data={memos[0]}
+          type="memos"
           onClickUpdate={onClickUpdate}
           onClickRemove={onClickRemove}
         />

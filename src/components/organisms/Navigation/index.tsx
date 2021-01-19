@@ -6,16 +6,17 @@ import styled from 'styled-components';
 interface Props {
   open: boolean;
   datas: Array<MemoData>;
+  type: 'memos' | 'trash';
 }
 
-const Navigation = ({ open, datas }: Props) => {
+const Navigation = ({ open, datas, type }: Props) => {
   const List = datas.map((v, i) => (
     <ListItem
       key={v.id}
       title={v.title}
       time={v.time}
       kind={v.kind}
-      path={`/${v.id}`}
+      path={type === 'memos' ? `/${v.id}` : `/trash${v.id}`}
     />
   ));
   return <StyledNavigation open={open}>{List}</StyledNavigation>;

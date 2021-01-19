@@ -20,14 +20,20 @@ const Templates = ({ pageName, children, type }: Props) => {
 
   useEffect(() => {
     if (type === 'memos') {
-      return dispatch(loadMemoAction());
+      dispatch(loadMemoAction());
+    } else {
+      console.log('멀가시발');
+      dispatch(loadTrashAction());
     }
-    dispatch(loadTrashAction());
   }, []);
 
   return (
     <Main open={openNav}>
-      <Navigation open={openNav} datas={type === 'memos' ? memos : trash} />
+      <Navigation
+        open={openNav}
+        datas={type === 'memos' ? memos : trash}
+        type={type}
+      />
       <Header onToggle={toggleNav} pageName={pageName} />
       {children}
     </Main>

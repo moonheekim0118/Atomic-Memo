@@ -7,22 +7,31 @@ import styled from 'styled-components';
 
 interface Props {
   data: memoData;
-  onClickUpdate: (e: React.MouseEvent) => void;
-  onClickRemove: (e: React.MouseEvent) => void;
+  type: 'memos' | 'trash';
+  onClickUpdate?: (e: React.MouseEvent) => void;
+  onClickRemove?: (e: React.MouseEvent) => void;
 }
 
-const MemoView = ({ data, onClickUpdate, onClickRemove }: Props) => {
+const MemoView = ({ data, type, onClickUpdate, onClickRemove }: Props) => {
   return (
     <StyledMemoView>
       <TitleView text={data.title} time={data.time} />
       <MainView text={data.main} />
       <ButtonContainer>
-        <Button color="green" onClick={onClickUpdate}>
-          Update
-        </Button>
-        <Button color="red" onClick={onClickRemove}>
-          Remove
-        </Button>
+        {type === 'memos' ? (
+          <>
+            <Button color="green" onClick={onClickUpdate}>
+              Update
+            </Button>
+            <Button color="red" onClick={onClickRemove}>
+              Remove
+            </Button>
+          </>
+        ) : (
+          <Button color="red" onClick={onClickRemove}>
+            Remove from Trash
+          </Button>
+        )}
       </ButtonContainer>
     </StyledMemoView>
   );

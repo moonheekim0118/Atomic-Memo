@@ -74,6 +74,7 @@ function* loadTrash() {
     snapshot.forEach((data) => {
       const refinedData = data.data();
       refinedData.time = formatTime(refinedData.time.seconds);
+      refinedData.id = data.id;
       datas.push(refinedData);
     });
 
@@ -182,7 +183,7 @@ function* watchLoadSingleTrash() {
 }
 
 function* watchLoadTrash() {
-  yield takeLatest(type.LOAD_MEMOS_REQUEST, loadTrash);
+  yield takeLatest(type.LOAD_TRASH_REQUEST, loadTrash);
 }
 
 function* watchCreate() {

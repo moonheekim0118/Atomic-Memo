@@ -1,3 +1,4 @@
+import { stat } from 'fs';
 import { STATUS_CODES } from 'http';
 import * as type from '../actions/memo';
 
@@ -244,10 +245,18 @@ const reducer = (state = initialState, action) => {
       };
 
     case type.REMOVE_SUCCESS:
-      const filteredTrash = state.trash.filter((v, i) => i !== action.data);
+      const removedIdx = state.trash.findIndex((v, i) => v.id === action.data);
+      const filteredTrash = state.trash.filter((v, i) => v.id !== action.data);
+      let nextTrash;
+      if (removedIdx === state.trash.length - 1) {
+        nextTrash = state.trash[0];
+      } else {
+        nextTrash = state.trash[removedIdx + 1];
+      }
       return {
         ...state,
         trash: filteredTrash,
+        singleTrash: nextTrash,
         RemoveLoading: false,
         RemoveDone: true,
         RemoveError: null,

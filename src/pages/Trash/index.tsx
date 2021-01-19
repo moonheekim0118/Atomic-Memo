@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { loadSinlgeTrashAction } from '../../actions/memo';
+import { loadSinlgeTrashAction, removeAction } from '../../actions/memo';
 import Templates from '../templates';
 import MemoView from '../../components/organisms/MemoView';
 
@@ -16,17 +16,21 @@ const Trash = () => {
     }
   }, [id]);
 
+  const onClickRemove = useCallback(() => {
+    dispatch(removeAction(id ? id : trash[0].id));
+  }, [id]);
+
   return (
     <Templates type="trash" pageName="trash">
       {singleTrash && (
-        <MemoView title={trash.title} time={trash.time} main={trash.main} />
+        <MemoView
+          type="trash"
+          data={singleTrash}
+          onClickRemove={onClickRemove}
+        />
       )}
       {!singleTrash && trash.length > 0 && (
-        <MemoView
-          title={singleTrash[0].title}
-          time={singleTrash[0].time}
-          main={singleTrash[0].main}
-        />
+        <MemoView type="trash" data={trash[0]} onClickRemove={onClickRemove} />
       )}
     </Templates>
   );
