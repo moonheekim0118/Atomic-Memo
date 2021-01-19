@@ -1,25 +1,42 @@
 import React from 'react';
 import TitleView from '../../molecules/TitleView';
 import MainView from '../../molecules/MainView';
+import memoData from '../../../model/memoData';
+import Button from '../../atoms/Button';
 import styled from 'styled-components';
 
 interface Props {
-  title: string;
-  time: string;
-  main: string;
+  data: memoData;
+  onClickUpdate: (e: React.MouseEvent) => void;
 }
 
-const MemoView = ({ title, time, main }: Props) => {
+const MemoView = ({ data, onClickUpdate }: Props) => {
   return (
     <StyledMemoView>
-      <TitleView text={title} time={time} />
-      <MainView text={main} />
+      <TitleView text={data.title} time={data.time} />
+      <MainView text={data.main} />
+      <ButtonContainer>
+        <Button color="green" onClick={onClickUpdate}>
+          Update
+        </Button>
+        <Button color="red">Remove</Button>
+      </ButtonContainer>
     </StyledMemoView>
   );
 };
 
 const StyledMemoView = styled.section`
   height: 100%;
+`;
+
+const ButtonContainer = styled.div`
+  position: absolute;
+  bottom: 30px;
+  right: 10%;
+  width: 200px;
+
+  display: flex;
+  justify-content: space-between;
 `;
 
 export default MemoView;

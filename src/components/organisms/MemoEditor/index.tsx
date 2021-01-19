@@ -3,24 +3,33 @@ import TitleText from '../../molecules/TitleText';
 import MainText from '../../molecules/MainText';
 import Select from '../../molecules/Select';
 import useValidation from '../../../hooks/useValidation';
+import memoData from '../../../model/memoData';
 import { Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { createAction } from '../../../actions/memo';
+import { createAction, updateAction } from '../../../actions/memo';
 import Button from '../../atoms/Button';
 import styled from 'styled-components';
 
+interface Props {
+  exData?: memoData;
+}
+
 const DEFAULT_TEXT = 'Select Kind of Memo!';
 
-const MemoEditor = () => {
+const MemoEditor = ({ exData }: Props) => {
   const [mainText, onChangeMainText, mainTextError] = useValidation({
+    initialValue: exData ? exData.main : '',
     max: 500,
     min: 0,
   });
   const [titleText, onChangeTitleText, mainTitleError] = useValidation({
+    initialValue: exData ? exData.title : '',
     max: 40,
     min: 1,
   });
-  const [memoKind, setMemoKind] = useState<string>(DEFAULT_TEXT);
+  const [memoKind, setMemoKind] = useState<string>(
+    exData ? exData.kind : DEFAULT_TEXT
+  );
   const [redirect, setRedirect] = useState<boolean>(false);
 
   const dispatch = useDispatch();
@@ -28,14 +37,21 @@ const MemoEditor = () => {
   const onSave = useCallback(() => {
     const kind = memoKind === DEFAULT_TEXT ? '🏄🏽‍♀️Life' : memoKind;
     const seconds = new Date().getTime() / 1000;
-    dispatch(
-      createAction({
-        title: titleText,
-        main: mainText,
-        kind,
-        time: { seconds },
-      })
-    );
+    const data = {
+      title: titleText,
+      main: mainText,
+      kind,
+      time: { seconds },
+    };
+    let actionData;
+    if (exData) {
+      data['id'] = exData.id;
+      console.log(data);
+      actionData = updateAction(data);
+    } else {
+      actionData = createAction(data);
+    }
+    dispatch(actionData);
     setRedirect(true);
   }, [mainText, titleText, memoKind]);
 

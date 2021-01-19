@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import { loadSinlgeMemoAction } from '../../actions/memo';
 import Templates from '../templates';
 import MemoView from '../../components/organisms/MemoView';
@@ -9,6 +9,7 @@ const Home = () => {
   let { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
   const { memos, singleMemo } = useSelector((state) => state.memo);
+  const [redirect, setRedirect] = useState<boolean>(false);
 
   useEffect(() => {
     if (id) {
@@ -16,21 +17,21 @@ const Home = () => {
     }
   }, [id]);
 
+  const onClickUpdate = useCallback(() => {
+    console.log('ㅎ머고');
+    setRedirect(true);
+  }, []);
+
+  if (redirect) {
+    return <Redirect to={id ? `/update${id}` : `/update${memos[0].id}`} />;
+  }
   return (
     <Templates type="memos" pageName="Home">
       {singleMemo && (
-        <MemoView
-          title={singleMemo.title}
-          time={singleMemo.time}
-          main={singleMemo.main}
-        />
+        <MemoView data={singleMemo} onClickUpdate={onClickUpdate} />
       )}
       {!singleMemo && memos.length > 0 && (
-        <MemoView
-          title={memos[0].title}
-          time={memos[0].time}
-          main={memos[0].main}
-        />
+        <MemoView data={memos[0]} onClickUpdate={onClickUpdate} />
       )}
     </Templates>
   );

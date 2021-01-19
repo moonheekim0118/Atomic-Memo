@@ -11,6 +11,7 @@ function* loadSingleMemo(action) {
     );
     const data = snapshot.data();
     data.time = formatTime(data.time.seconds);
+    data.id = snapshot.id;
     yield put({
       type: type.LOAD_SINGLE_MEMO_SUCCESS,
       data,
@@ -105,7 +106,18 @@ function* createMemo(action) {
 
 function* updateMemo(action) {
   try {
-    yield call(rsf.firestore.updateDocument, 'memos', action.data);
+    yield call(
+      rsf.firestore.updateDocument,
+      `memos/${action.data.id}`,
+      'title',
+      action.data.title,
+      'main',
+      action.data.main,
+      'kind',
+      action.data.kind,
+      'time',
+      action.data.time
+    );
     yield put({
       type: type.UPDATE_SUCCESS,
       data: action.data,
