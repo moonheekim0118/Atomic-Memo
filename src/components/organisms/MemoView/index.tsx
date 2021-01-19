@@ -8,9 +8,10 @@ import styled from 'styled-components';
 interface Props {
   data: memoData;
   onClickUpdate: (e: React.MouseEvent) => void;
+  onClickRemove: (e: React.MouseEvent) => void;
 }
 
-const MemoView = ({ data, onClickUpdate }: Props) => {
+const MemoView = ({ data, onClickUpdate, onClickRemove }: Props) => {
   return (
     <StyledMemoView>
       <TitleView text={data.title} time={data.time} />
@@ -19,7 +20,9 @@ const MemoView = ({ data, onClickUpdate }: Props) => {
         <Button color="green" onClick={onClickUpdate}>
           Update
         </Button>
-        <Button color="red">Remove</Button>
+        <Button color="red" onClick={onClickRemove}>
+          Remove
+        </Button>
       </ButtonContainer>
     </StyledMemoView>
   );

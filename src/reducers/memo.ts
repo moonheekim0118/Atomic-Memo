@@ -1,3 +1,4 @@
+import { STATUS_CODES } from 'http';
 import * as type from '../actions/memo';
 
 export const initialState = {
@@ -176,6 +177,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         memos: newMemos,
+        singleMemo: newMemos[idx_update],
         UpdateLoading: false,
         UpdateDone: true,
         UpdateError: null,
@@ -205,13 +207,20 @@ const reducer = (state = initialState, action) => {
       };
 
     case type.TRASH_SUCCESS:
-      const trashedMemo = state.memos.find((v, i) => i === action.data);
-      const filterdMemo = state.memos.filter((v, i) => i !== action.data);
+      const idx = state.memos.findIndex((v, i) => v.id === action.data.id);
+      const filterdMemo = state.memos.filter((v, i) => v.id !== action.data.id);
       const updatedTrash = [...state.trash];
-      updatedTrash.concat(trashedMemo);
+      updatedTrash.concat(action.data);
+      let nextMemo;
+      if (idx === state.memos.length - 1) {
+        nextMemo = state.memos[0];
+      } else {
+        nextMemo = state.memos[idx + 1];
+      }
       return {
         ...state,
         memos: filterdMemo,
+        singleMemo: nextMemo,
         trash: updatedTrash,
         TrashLoading: false,
         TrashDone: true,

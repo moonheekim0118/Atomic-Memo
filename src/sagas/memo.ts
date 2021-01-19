@@ -141,7 +141,7 @@ function* trashMemo(action) {
     const document = snapshot.data();
     yield call(rsf.firestore.addDocument, 'trash', document);
     yield call(rsf.firestore.deleteDocument, `memos/${action.data}`);
-
+    document.id = snapshot.id;
     yield put({
       type: type.TRASH_SUCCESS,
       data: document,
