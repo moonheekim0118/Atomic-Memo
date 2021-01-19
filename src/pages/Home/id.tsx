@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useState, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Redirect } from 'react-router-dom';
 import { loadSinlgeMemoAction, trashAction } from '../../actions/memo';
+import getNextId from '../../util/getNextId';
 import Templates from '../templates';
 import MemoView from '../../components/organisms/MemoView';
 
@@ -21,16 +22,7 @@ const Home = () => {
   }, [id, memos]);
 
   const onClickRemove = useCallback(() => {
-    let index = memos.findIndex((v, i) => v.id === id) || 0;
-    let nextId;
-    if (index === memos.length - 1) {
-      nextId = memos[0]?.id || '';
-    } else {
-      nextId = memos[index + 1].id;
-    }
-    if (memos.length === 1) {
-      nextId = '';
-    }
+    const nextId = getNextId(memos, id);
     dispatch(trashAction(id ? id : memos[0].id));
     setRedirectPath(`/${nextId}`);
   }, [memos, id]);

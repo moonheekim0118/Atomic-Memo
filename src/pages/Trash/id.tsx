@@ -6,6 +6,7 @@ import {
   removeAction,
   restoreAction,
 } from '../../actions/memo';
+import getNextId from '../../util/getNextId';
 import Templates from '../templates';
 import MemoView from '../../components/organisms/MemoView';
 
@@ -21,33 +22,13 @@ const Trash = () => {
   }, [id]);
 
   const onClickRestore = useCallback(() => {
-    let index = trash.findIndex((v, i) => v.id === id) || 0;
-
-    let nextId;
-    if (index === trash.length - 1) {
-      nextId = trash[0]?.id || '';
-    } else {
-      nextId = trash[index + 1].id;
-    }
-    if (trash.length === 1) {
-      nextId = '';
-    }
+    const nextId = getNextId(trash, id);
     dispatch(restoreAction(id));
     setRedirectPath(`/trash/${nextId}`);
   }, [id]);
 
   const onClickRemove = useCallback(() => {
-    let index = trash.findIndex((v, i) => v.id === id) || 0;
-
-    let nextId;
-    if (index === trash.length - 1) {
-      nextId = trash[0]?.id || '';
-    } else {
-      nextId = trash[index + 1].id;
-    }
-    if (trash.length === 1) {
-      nextId = '';
-    }
+    const nextId = getNextId(trash, id);
     dispatch(removeAction(id));
     setRedirectPath(`/trash/${nextId}`);
   }, [id]);

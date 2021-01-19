@@ -1,5 +1,5 @@
 interface MemoData {
-  id: number;
+  id: string;
   title?: string;
   kind?: string;
   time?: string;
