@@ -40,6 +40,10 @@ export const initialState = {
   RemoveLoading: false,
   RemoveDone: false,
   RemoveError: null,
+
+  RestoreLoading: false,
+  RestoreDone: false,
+  RestoreError: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -145,7 +149,7 @@ const reducer = (state = initialState, action) => {
       };
 
     case type.CREATE_SUCCESS:
-      const updatedMemo = [...state.memos];
+      let updatedMemo = [...state.memos];
       updatedMemo.concat(action.data);
       return {
         ...state,
@@ -237,7 +241,7 @@ const reducer = (state = initialState, action) => {
       };
 
     case type.REMOVE_SUCCESS:
-      const filteredTrash = state.trash.filter((v, i) => v.id !== action.data);
+      let filteredTrash = state.trash.filter((v, i) => v.id !== action.data);
       return {
         ...state,
         trash: filteredTrash,
@@ -252,6 +256,32 @@ const reducer = (state = initialState, action) => {
         RemoveLoading: false,
         RemoveDone: false,
         RemoveError: action.error,
+      };
+    case type.RESTORE_REQUEST:
+      return {
+        ...state,
+        RestoreLoading: true,
+        RestoreDone: false,
+        RestoreError: null,
+      };
+    case type.RESTORE_SUCCESS:
+      filteredTrash = state.trash.filter((v, i) => v.id !== action.data.id);
+      updatedMemo = [...state.memos];
+      updatedMemo.concat(action.data);
+      return {
+        ...state,
+        memos: updatedMemo,
+        trash: filteredTrash,
+        RestoreLoading: false,
+        RestoreDone: true,
+        RestoreError: null,
+      };
+    case type.RESTORE_FAIL:
+      return {
+        ...state,
+        RestoreLoading: false,
+        RestoreDone: false,
+        RestoreError: action.error,
       };
 
     default:

@@ -30,6 +30,10 @@ export const REMOVE_REQUEST = 'REMOVE_REQUEST';
 export const REMOVE_SUCCESS = 'REMOVE_SUCCESS';
 export const REMOVE_FAIL = 'REMOVE_FAIL';
 
+export const RESTORE_REQUEST = 'RESTORE_REQUEST';
+export const RESTORE_SUCCESS = 'RESTORE_SUCCESS';
+export const RESTORE_FAIL = 'RESTORE_FAIL';
+
 export const loadSinlgeMemoAction = (data) => {
   return { type: LOAD_SINGLE_MEMO_REQUEST, data };
 };
@@ -60,4 +64,8 @@ export const trashAction = (data) => {
 
 export const removeAction = (data) => {
   return { type: REMOVE_REQUEST, data };
+};
+
+export const restoreAction = (data) => {
+  return { type: RESTORE_REQUEST, data };
 };

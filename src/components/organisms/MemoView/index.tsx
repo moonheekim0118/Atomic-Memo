@@ -10,9 +10,16 @@ interface Props {
   type: 'memos' | 'trash';
   onClickUpdate?: (e: React.MouseEvent) => void;
   onClickRemove?: (e: React.MouseEvent) => void;
+  onClickRestore?: (e: React.MouseEvent) => void;
 }
 
-const MemoView = ({ data, type, onClickUpdate, onClickRemove }: Props) => {
+const MemoView = ({
+  data,
+  type,
+  onClickUpdate,
+  onClickRemove,
+  onClickRestore,
+}: Props) => {
   return (
     <StyledMemoView>
       <TitleView text={data.title} time={data.time} />
@@ -28,9 +35,14 @@ const MemoView = ({ data, type, onClickUpdate, onClickRemove }: Props) => {
             </Button>
           </>
         ) : (
-          <Button color="red" onClick={onClickRemove}>
-            Remove from Trash
-          </Button>
+          <>
+            <Button color="green" onClick={onClickRestore}>
+              Restore
+            </Button>
+            <Button color="red" onClick={onClickRemove}>
+              Remove
+            </Button>
+          </>
         )}
       </ButtonContainer>
     </StyledMemoView>

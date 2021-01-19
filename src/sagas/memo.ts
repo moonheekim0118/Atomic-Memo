@@ -170,6 +170,28 @@ function* removeMemo(action) {
   }
 }
 
+function* restoreTrash(action) {
+  try {
+    const snpashot = yield call(
+      rsf.firestore.getDocument,
+      `trash/${action.data}`
+    );
+    const document = snpashot.data();
+    yield call(rsf.firestore.addDocument, 'memos', document);
+    yield call(rsf.firestore.deleteDocument, `trash/${action.data}`);
+    document.id = snpashot.id;
+    yield put({
+      type: type.RESTORE_SUCCESS,
+      data: document,
+    });
+  } catch (error) {
+    yield put({
+      type: type.RESTORE_FAIL,
+      error: error || '다시 시도해주세요.',
+    });
+  }
+}
+
 function* watchLoadSingleMemo() {
   yield takeLatest(type.LOAD_SINGLE_MEMO_REQUEST, loadSingleMemo);
 }
@@ -202,6 +224,10 @@ function* watchRemove() {
   yield takeLatest(type.REMOVE_REQUEST, removeMemo);
 }
 
+function* watchRestore() {
+  yield takeLatest(type.RESTORE_REQUEST, restoreTrash);
+}
+
 export default function* memoSaga() {
   yield all([
     fork(watchLoadSingleMemo),
@@ -212,5 +238,6 @@ export default function* memoSaga() {
     fork(watchUpdate),
     fork(watchTrash),
     fork(watchRemove),
+    fork(watchRestore),
   ]);
 }
