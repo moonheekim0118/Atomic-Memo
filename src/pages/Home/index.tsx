@@ -9,24 +9,34 @@ const Home = () => {
   let { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
   const { memos, singleMemo } = useSelector((state) => state.memo);
-  const [redirect, setRedirect] = useState<boolean>(false);
+  const [redirectPath, setRedirectPath] = useState<string>('');
 
   useEffect(() => {
     if (id) {
+      setRedirectPath('');
       dispatch(loadSinlgeMemoAction(id));
     }
   }, [id]);
 
   const onClickUpdate = useCallback(() => {
-    setRedirect(true);
-  }, []);
+    const updateId = id ? id : memos[0].id;
+    setRedirectPath(`/update${updateId}`);
+  }, [id, memos]);
 
   const onClickRemove = useCallback(() => {
+    let index = memos.findIndex((v, i) => v.id === id) || 0;
+    let nextId;
+    if (index === memos.length - 1) {
+      nextId = memos[0]?.id || '';
+    } else {
+      nextId = memos[index + 1].id;
+    }
     dispatch(trashAction(id ? id : memos[0].id));
-  }, [id]);
+    setRedirectPath(`/${nextId}`);
+  }, [memos, id]);
 
-  if (redirect) {
-    return <Redirect to={id ? `/update${id}` : `/update${memos[0].id}`} />;
+  if (redirectPath.length > 0) {
+    return <Redirect to={redirectPath} />;
   }
   return (
     <Templates type="memos" pageName="Home">

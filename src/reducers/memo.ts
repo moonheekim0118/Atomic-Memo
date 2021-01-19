@@ -208,20 +208,12 @@ const reducer = (state = initialState, action) => {
       };
 
     case type.TRASH_SUCCESS:
-      const idx = state.memos.findIndex((v, i) => v.id === action.data.id);
       const filterdMemo = state.memos.filter((v, i) => v.id !== action.data.id);
       const updatedTrash = [...state.trash];
       updatedTrash.concat(action.data);
-      let nextMemo;
-      if (idx === state.memos.length - 1) {
-        nextMemo = state.memos[0];
-      } else {
-        nextMemo = state.memos[idx + 1];
-      }
       return {
         ...state,
         memos: filterdMemo,
-        singleMemo: nextMemo,
         trash: updatedTrash,
         TrashLoading: false,
         TrashDone: true,
@@ -245,18 +237,10 @@ const reducer = (state = initialState, action) => {
       };
 
     case type.REMOVE_SUCCESS:
-      const removedIdx = state.trash.findIndex((v, i) => v.id === action.data);
       const filteredTrash = state.trash.filter((v, i) => v.id !== action.data);
-      let nextTrash;
-      if (removedIdx === state.trash.length - 1) {
-        nextTrash = state.trash[0];
-      } else {
-        nextTrash = state.trash[removedIdx + 1];
-      }
       return {
         ...state,
         trash: filteredTrash,
-        singleTrash: nextTrash,
         RemoveLoading: false,
         RemoveDone: true,
         RemoveError: null,
