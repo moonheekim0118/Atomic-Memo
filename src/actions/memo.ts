@@ -1,3 +1,5 @@
+import { MemoData } from '../model/memoData';
+
 export const LOAD_SINGLE_MEMO_REQUEST = 'LOAD_SINGLE_MEMO_REQUEST';
 export const LOAD_SINGLE_MEMO_SUCCESS = 'LOAD_SINGLE_MEMO_SUCCESS';
 export const LOAD_SINGLE_MEMO_FAIL = 'LOAD_SINGLE_MEMO_FAIL';
@@ -34,7 +36,7 @@ export const RESTORE_REQUEST = 'RESTORE_REQUEST';
 export const RESTORE_SUCCESS = 'RESTORE_SUCCESS';
 export const RESTORE_FAIL = 'RESTORE_FAIL';
 
-export const loadSinlgeMemoAction = (data) => {
+export const loadSinlgeMemoAction = (data: string) => {
   return { type: LOAD_SINGLE_MEMO_REQUEST, data };
 };
 
@@ -42,7 +44,7 @@ export const loadMemoAction = () => {
   return { type: LOAD_MEMOS_REQUEST };
 };
 
-export const loadSinlgeTrashAction = (data) => {
+export const loadSinlgeTrashAction = (data: string) => {
   return { type: LOAD_SINGLE_TRASH_REQUEST, data };
 };
 
@@ -50,22 +52,22 @@ export const loadTrashAction = () => {
   return { type: LOAD_TRASH_REQUEST };
 };
 
-export const createAction = (data) => {
+export const createAction = (data: MemoData) => {
   return { type: CREATE_REQUEST, data };
 };
 
-export const updateAction = (data) => {
+export const updateAction = (data: MemoData) => {
   return { type: UPDATE_REQUEST, data };
 };
 
-export const trashAction = (data) => {
+export const trashAction = (data: string) => {
   return { type: TRASH_REQUEST, data };
 };
 
-export const removeAction = (data) => {
+export const removeAction = (data: string) => {
   return { type: REMOVE_REQUEST, data };
 };
 
-export const restoreAction = (data) => {
+export const restoreAction = (data: string) => {
   return { type: RESTORE_REQUEST, data };
 };

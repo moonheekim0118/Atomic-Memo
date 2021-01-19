@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Templates from '../templates';
 import { loadMemoAction } from '../../actions/memo';
+import Templates from '../templates';
 import MemoEditor from '../../components/organisms/MemoEditor';
 
 const Write = () => {

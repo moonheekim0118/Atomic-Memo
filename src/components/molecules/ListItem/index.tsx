@@ -4,11 +4,6 @@ import MemoTitle from '../MemoTitle';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 
-// 네비게이션 바에 들어갈 메모 아이템 링크
-// 메모 종류
-// 마지막으로 완성한 시간
-// 메모 제목
-
 interface Props {
   title: string;
   time: string;

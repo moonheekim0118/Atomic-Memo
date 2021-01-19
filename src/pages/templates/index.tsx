@@ -22,7 +22,6 @@ const Templates = ({ pageName, children, type }: Props) => {
     if (type === 'memos') {
       dispatch(loadMemoAction());
     } else {
-      console.log('멀가시발');
       dispatch(loadTrashAction());
     }
   }, []);

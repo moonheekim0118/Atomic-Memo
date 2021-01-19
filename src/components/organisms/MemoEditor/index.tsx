@@ -3,7 +3,7 @@ import TitleText from '../../molecules/TitleText';
 import MainText from '../../molecules/MainText';
 import Select from '../../molecules/Select';
 import useValidation from '../../../hooks/useValidation';
-import memoData from '../../../model/memoData';
+import { SentMemoData } from '../../../model/memoData';
 import { Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createAction, updateAction } from '../../../actions/memo';
@@ -11,7 +11,7 @@ import Button from '../../atoms/Button';
 import styled from 'styled-components';
 
 interface Props {
-  exData?: memoData;
+  exData?: SentMemoData;
 }
 
 const DEFAULT_TEXT = 'Select Kind of Memo!';
@@ -36,7 +36,7 @@ const MemoEditor = ({ exData }: Props) => {
 
   const onSave = useCallback(() => {
     const kind = memoKind === DEFAULT_TEXT ? '🏄🏽‍♀️Life' : memoKind;
-    const seconds = new Date().getTime() / 1000;
+    const seconds = new Date().getTime() / 1000; // 현재 시간 구하기
     const data = {
       title: titleText,
       main: mainText,
@@ -45,8 +45,8 @@ const MemoEditor = ({ exData }: Props) => {
     };
     let actionData;
     if (exData) {
+      // edit mode
       data['id'] = exData.id;
-      console.log(data);
       actionData = updateAction(data);
     } else {
       actionData = createAction(data);

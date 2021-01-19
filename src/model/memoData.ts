@@ -1,9 +1,15 @@
-interface MemoData {
-  id: string;
+export interface MemoData {
+  id?: string;
   title?: string;
   kind?: string;
-  time?: string;
+  time?: { seconds: number } | string;
   main?: string;
 }
 
-export default MemoData;
+export interface SentMemoData {
+  id: string;
+  title: string;
+  kind: string;
+  time: string;
+  main: string;
+}

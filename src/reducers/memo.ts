@@ -1,5 +1,3 @@
-import { stat } from 'fs';
-import { STATUS_CODES } from 'http';
 import * as type from '../actions/memo';
 
 export const initialState = {
@@ -174,8 +172,8 @@ const reducer = (state = initialState, action) => {
       };
 
     case type.UPDATE_SUCCESS:
-      const newMemos = [...state.memos];
-      const idx_update = newMemos.findIndex((v, i) => v.id === action.data.id);
+      let newMemos = [...state.memos];
+      let idx_update = newMemos.findIndex((v, i) => v.id === action.data.id);
       if (idx_update) {
         newMemos[idx_update] = action.data;
       }
@@ -212,8 +210,8 @@ const reducer = (state = initialState, action) => {
       };
 
     case type.TRASH_SUCCESS:
-      const filterdMemo = state.memos.filter((v, i) => v.id !== action.data.id);
-      const updatedTrash = [...state.trash];
+      let filterdMemo = state.memos.filter((v, i) => v.id !== action.data.id);
+      let updatedTrash = [...state.trash];
       updatedTrash.concat(action.data);
       return {
         ...state,

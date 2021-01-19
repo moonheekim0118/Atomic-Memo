@@ -1,12 +1,12 @@
 import React from 'react';
 import TitleView from '../../molecules/TitleView';
 import MainView from '../../molecules/MainView';
-import memoData from '../../../model/memoData';
+import { SentMemoData } from '../../../model/memoData';
 import Button from '../../atoms/Button';
 import styled from 'styled-components';
 
 interface Props {
-  data: memoData;
+  data: SentMemoData;
   type: 'memos' | 'trash';
   onClickUpdate?: (e: React.MouseEvent) => void;
   onClickRemove?: (e: React.MouseEvent) => void;
