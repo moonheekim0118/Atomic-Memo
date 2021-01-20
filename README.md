@@ -11,6 +11,7 @@
 ### frontend
 
 - React
+- React-Router
 - Redux / Redux-saga
 - Styled Components
 
