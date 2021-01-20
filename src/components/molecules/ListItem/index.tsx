@@ -1,6 +1,6 @@
 import React from 'react';
 import Span from '../../atoms/Span';
-import MemoTitle from '../MemoTitle';
+import MemoKind from '../../../util/memoKind';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -16,7 +16,14 @@ const ListItem = ({ title, time, kind, path }: Props) => {
 
   return (
     <StyledListItem to={path} visiting={location.pathname === path}>
-      <MemoTitle title={title} kind={kind} />
+      <TitleContainer>
+        <Span size="small" padding="0 0.5em 0 0">
+          {MemoKind[kind]}
+        </Span>
+        <Span size="small" width="5.5em">
+          {title}
+        </Span>
+      </TitleContainer>
       <Span size="small" padding="2em 1em">
         {time}
       </Span>
@@ -38,6 +45,11 @@ const StyledListItem = styled<{ visiting: boolean }>(Link)`
   &:hover {
     background-color: #f4f4f4;
   }
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  padding: 2em;
 `;
 
 export default ListItem;
