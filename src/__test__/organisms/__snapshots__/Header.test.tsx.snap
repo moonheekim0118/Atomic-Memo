@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header/> matches snpashot 1`] = `"<header class=\\"Header__StyledHeader-ooc1x8-0 gXPHBW\\"><button color=\\"#3399ff\\" class=\\"Button__StyledButton-hxb5gx-0 dfmXPz\\">Menu</button><span width=\\"auto\\" display=\\"inline\\" class=\\"Span__StyledSpan-sc-10y5m6u-0 jaanRG normal\\">Home</span><a href=\\"/trash\\"><span width=\\"auto\\" display=\\"inline\\" class=\\"Span__StyledSpan-sc-10y5m6u-0 jaanRG normal\\">Trash</span></a></header>"`;

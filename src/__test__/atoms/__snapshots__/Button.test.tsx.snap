@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button/> matches snpashot 1`] = `"<button class=\\"Button__StyledButton-hxb5gx-0 dXflyU\\">test</button>"`;

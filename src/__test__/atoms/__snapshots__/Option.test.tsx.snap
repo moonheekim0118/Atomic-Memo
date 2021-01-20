@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Option/> matches snpashot 1`] = `"<li data-name=\\"test\\" class=\\"Option__StyledOption-sc-1ojvno1-0 bYrEZC select-option\\">test</li>"`;

@@ -1,11 +1,11 @@
 import React from 'react';
-import MemoData from '../../../model/memoData';
+import { SentMemoData } from '../../../model/memoData';
 import ListItem from '../../molecules/ListItem';
 import styled from 'styled-components';
 
 interface Props {
   open: boolean;
-  datas: Array<MemoData>;
+  datas: Array<SentMemoData>;
   type: 'memos' | 'trash';
 }
 

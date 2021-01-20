@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MemoTitle/> matches snpashot 1`] = `"<div class=\\"MemoTitle__StyledMemoTitle-e33wpr-0 cPfMRA\\"><span width=\\"auto\\" display=\\"inline\\" class=\\"Span__StyledSpan-sc-10y5m6u-0 dZpPqp small\\"></span><span width=\\"5.5em\\" display=\\"inline\\" class=\\"Span__StyledSpan-sc-10y5m6u-0 bvWVQT small\\">test</span></div>"`;

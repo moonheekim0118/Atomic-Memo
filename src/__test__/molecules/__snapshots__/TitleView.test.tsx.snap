@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TitleView/> matches snpashot 1`] = `"<div class=\\"TitleView__StyledTitleView-sc-18c7sy9-0 bPlOFX\\"><span width=\\"auto\\" display=\\"inline\\" class=\\"Span__StyledSpan-sc-10y5m6u-0 jaanRG title\\">test</span><span width=\\"auto\\" display=\\"inline\\" class=\\"Span__StyledSpan-sc-10y5m6u-0 jaanRG small\\">test</span></div>"`;
