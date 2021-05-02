@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const dotenv = require('dotenv').config();
+const dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'production',
@@ -39,6 +39,7 @@ module.exports = {
     hotOnly: true,
   },
   plugins: [
+    new dotenv(),
     new webpack.HotModuleReplacementPlugin({
       'process.env.API_KEY': JSON.stringify(process.env.API_KEY),
       'process.env.AUTH_DOMAIN': JSON.stringify(process.env.AUTH_DOMAIN),
