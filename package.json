@@ -5,7 +5,7 @@
   "scripts": {
     "start": "webpack serve",
     "test": "jest",
-    "build": "webpack --mode development --watch"
+    "build": "webpack --mode production --watch"
   },
   "repository": {
     "type": "git",
