@@ -1,4 +1,6 @@
 # Atomic Memo
+![](https://mooneedev.netlify.app/bb65ecc62bafb87fb7eed74fe1774b6c/%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98.gif)
+
 
 아토믹 패턴 연습을 위해 구현해본 간단한 메모장 어플리케이션 <br/>
 
@@ -6,16 +8,13 @@
 
 - 메모 작성 / 메모 수정 / 메모 삭제 (쓰레기통) / 메모 영구 삭제 / 메모 복원 기능 구현
 
-<br/>
-
 ### frontend
 
 - React
+- React-Router
 - Redux / Redux-saga
 - Styled Components
 
 ### Backend
 
 - firebase
-
-![](https://mooneedev.netlify.app/bb65ecc62bafb87fb7eed74fe1774b6c/%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98.gif)
